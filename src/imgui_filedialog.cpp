@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Limeoats 
+	Copyright 2020 Limeoats
 	Original project: https://github.com/Limeoats/L2DFileDialog
 
 	Changes by Vladimir Sigalkin
@@ -13,7 +13,7 @@
 #include <sstream>
 
 #include <imgui.h>
-#include <imgui_internal.h>
+
 #include "imgui_filedialog.h"
 
 using namespace std::chrono_literals;
@@ -50,7 +50,7 @@ void RefreshInfo(ImFileDialogInfo* dialogInfo)
 bool ImGui::FileDialog(bool* open, ImFileDialogInfo* dialogInfo)
 {
 	if (!*open) return false;
-	
+
 	static float initialSpacingColumn0 = 230.0f;
 	static float initialSpacingColumn1 = 80.0f;
 	static float initialSpacingColumn2 = 90.0f;
@@ -60,14 +60,12 @@ bool ImGui::FileDialog(bool* open, ImFileDialogInfo* dialogInfo)
 	static ImGuiFileDialogSortOrder typeSortOrder = ImGuiFileDialogSortOrder_None;
 
 	assert(dialogInfo != nullptr);
-	
+
 	bool complete = false;
 
 	ImGui::PushID(dialogInfo);
-	ImGui::SetNextWindowSize(ImVec2(740.0f, 410.0f));
+	ImGui::SetNextWindowSize(ImVec2(740.0f, 410.0f), ImGuiCond_FirstUseEver);
 
-
-	
 	if (ImGui::Begin(dialogInfo->title.c_str(), open))
 	{
 		if (dialogInfo->currentFiles.empty() && dialogInfo->currentDirectories.empty() || dialogInfo->refreshInfo)
@@ -331,7 +329,7 @@ bool ImGui::FileDialog(bool* open, ImFileDialogInfo* dialogInfo)
 			sizeSortOrder = ImGuiFileDialogSortOrder_None;
 			typeSortOrder = ImGuiFileDialogSortOrder_None;
 			dateSortOrder = ImGuiFileDialogSortOrder_None;
-			
+
 			dialogInfo->refreshInfo = false;
 			dialogInfo->currentIndex = 0;
 			dialogInfo->currentFiles.clear();

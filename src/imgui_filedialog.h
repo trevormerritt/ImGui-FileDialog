@@ -1,5 +1,5 @@
 /*
-	Copyright 2020 Limeoats 
+	Copyright 2020 Limeoats
 	Original project: https://github.com/Limeoats/L2DFileDialog
 
 	Changes by Vladimir Sigalkin
@@ -8,6 +8,7 @@
 #pragma once
 
 #include <filesystem>
+#include <imgui.h>
 
 typedef int ImGuiFileDialogType;	// -> enum ImGuiFileDialogType_        // Enum: A file dialog type
 
@@ -34,6 +35,6 @@ struct ImFileDialogInfo
 };
 
 namespace ImGui
-{	
+{
 	IMGUI_API bool FileDialog(bool* open, ImFileDialogInfo* dialogInfo);
 }
