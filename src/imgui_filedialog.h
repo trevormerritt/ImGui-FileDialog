@@ -2,7 +2,7 @@
 	Copyright 2020 Limeoats 
 	Original project: https://github.com/Limeoats/L2DFileDialog
 
-	Changes by dr. ext
+	Changes by Vladimir Sigalkin
 */
 
 #pragma once
