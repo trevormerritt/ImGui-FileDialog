@@ -1,21 +1,25 @@
-# Lime2D File Dialog
-A C++ file dialog using Dear ImGui.
+# File Dialog for Dear ImGui
+Based on [L2DFileDialog](https://github.com/Limeoats/L2DFileDialog).
 
-![L2DFileDialog](/screenshots/main_pic.png?raw=true "L2DFileDialog")
+![File Dialog](/screenshots/screen1.png?raw=true)
 
 ### Usage
-Add `L2DFileDialog.h` to your C++ project and include it where you use ImGui. Then, set `FileDialog::fileDialogOpen` to `true` to set the open state. Finally, in your `update` method, check if `FileDialog::fileDialogOpen == true` and if so, call `FileDialog::ShowFileDialog`, passing in a `char` array as a buffer to store the chosen file/folder path.
+Add `imgui_filedialog.h` to your C++ project and include it where you use ImGui.
 
 ### Features
-* New folder
-* Delete folder
+* Different file dialog types:
+  * Open File
+  * Save File
 * Sort by:
   * File
   * Size
   * Type
   * Last modified date
 
-![L2DFileDialogGif](/screenshots/choose_folder.gif)
+### Changes
+* Added SaveFile dialog type.
+* Changed interface.
+* Changed code style.
 
 ### License
-This project is under the [Apache License](./license.md).
+This project is under the [Apache License](/LICENSE).
