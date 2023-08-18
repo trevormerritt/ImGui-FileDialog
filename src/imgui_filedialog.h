@@ -6,6 +6,14 @@
 */
 
 #pragma once
+#include <time.h>
+#include <algorithm>
+#include <cstring>
+#include <chrono>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <imgui.h>
 
 #include <filesystem>
 #include <imgui.h>

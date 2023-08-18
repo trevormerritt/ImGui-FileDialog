@@ -3,16 +3,10 @@
 	Original project: https://github.com/Limeoats/L2DFileDialog
 
 	Changes by Vladimir Sigalkin
+    Compile for Linux by Trevor Merritt
 */
 
 #pragma once
-
-#include <chrono>
-#include <string>
-#include <filesystem>
-#include <sstream>
-
-#include <imgui.h>
 
 #include "imgui_filedialog.h"
 
@@ -263,7 +257,7 @@ bool ImGui::FileDialog(bool* open, ImFileDialogInfo* dialogInfo)
 			auto st = std::chrono::time_point_cast<std::chrono::system_clock::duration>(lastWriteTime - decltype(lastWriteTime)::clock::now() + std::chrono::system_clock::now());
 			std::time_t tt = std::chrono::system_clock::to_time_t(st);
 			std::tm mt;
-			localtime_s(&mt, &tt);
+			localtime_r(&tt, &mt);
 			std::stringstream ss;
 			ss << std::put_time(&mt, "%F %R");
 			ImGui::TextUnformatted(ss.str().c_str());
@@ -295,7 +289,7 @@ bool ImGui::FileDialog(bool* open, ImFileDialogInfo* dialogInfo)
 			auto st = std::chrono::time_point_cast<std::chrono::system_clock::duration>(lastWriteTime - decltype(lastWriteTime)::clock::now() + std::chrono::system_clock::now());
 			std::time_t tt = std::chrono::system_clock::to_time_t(st);
 			std::tm mt;
-			localtime_s(&mt, &tt);
+			localtime_r( &tt, &mt);
 			std::stringstream ss;
 			ss << std::put_time(&mt, "%F %R");
 			ImGui::TextUnformatted(ss.str().c_str());
