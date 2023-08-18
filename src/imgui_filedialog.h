@@ -36,6 +36,9 @@ struct ImFileDialogInfo
 	std::filesystem::path directoryPath;
 	std::filesystem::path resultPath;
 
+    std::string includeFilter;
+    std::string excludeFilter;
+
 	bool refreshInfo;
 	size_t currentIndex;
 	std::vector<std::filesystem::directory_entry> currentFiles;

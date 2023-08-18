@@ -6,8 +6,6 @@
     Compile for Linux by Trevor Merritt
 */
 
-#pragma once
-
 #include "imgui_filedialog.h"
 
 using namespace std::chrono_literals;
@@ -266,36 +264,43 @@ bool ImGui::FileDialog(bool* open, ImFileDialogInfo* dialogInfo)
 			index++;
 		}
 
-		// Draw files
+
+		// Draw files, skipping those that fail the filter test
+
 		for (size_t i = 0; i < files->size(); ++i)
 		{
 			auto fileEntry = dialogInfo->currentFiles[i];
 			auto filePath = fileEntry.path();
 			auto fileName = filePath.filename();
 
-			if (ImGui::Selectable(fileName.string().c_str(), dialogInfo->currentIndex == index, ImGuiSelectableFlags_AllowDoubleClick, ImVec2(ImGui::GetWindowContentRegionWidth(), 0)))
-			{
-				dialogInfo->currentIndex = index;
-				dialogInfo->fileName = fileName;
-			}
+            if (fileName.string().find("jpg") > 0 || fileName.string().find("png") > 0) {
+                if (ImGui::Selectable(fileName.string().c_str(), dialogInfo->currentIndex == index,
+                                      ImGuiSelectableFlags_AllowDoubleClick,
+                                      ImVec2(ImGui::GetWindowContentRegionWidth(), 0))) {
+                    dialogInfo->currentIndex = index;
+                    dialogInfo->fileName = fileName;
+                }
 
-			ImGui::NextColumn();
-			ImGui::TextUnformatted(std::to_string(fileEntry.file_size()).c_str());
-			ImGui::NextColumn();
-			ImGui::TextUnformatted(filePath.extension().string().c_str());
-			ImGui::NextColumn();
+                ImGui::NextColumn();
+                ImGui::TextUnformatted(std::to_string(fileEntry.file_size()).c_str());
+                ImGui::NextColumn();
+                ImGui::TextUnformatted(filePath.extension().string().c_str());
+                ImGui::NextColumn();
 
-			auto lastWriteTime = fileEntry.last_write_time();
-			auto st = std::chrono::time_point_cast<std::chrono::system_clock::duration>(lastWriteTime - decltype(lastWriteTime)::clock::now() + std::chrono::system_clock::now());
-			std::time_t tt = std::chrono::system_clock::to_time_t(st);
-			std::tm mt;
-			localtime_r( &tt, &mt);
-			std::stringstream ss;
-			ss << std::put_time(&mt, "%F %R");
-			ImGui::TextUnformatted(ss.str().c_str());
-			ImGui::NextColumn();
+                auto lastWriteTime = fileEntry.last_write_time();
+                auto st = std::chrono::time_point_cast<std::chrono::system_clock::duration>(
+                        lastWriteTime - decltype(lastWriteTime)
+                ::clock::now() + std::chrono::system_clock::now());
+                std::time_t tt = std::chrono::system_clock::to_time_t(st);
+                std::tm mt;
+                localtime_r(&tt, &mt);
+                std::stringstream ss;
+                ss << std::put_time(&mt, "%F %R");
+                ImGui::TextUnformatted(ss.str().c_str());
+                ImGui::NextColumn();
+            }
+            index++;
 
-			index++;
 		}
 		ImGui::EndChild();
 
