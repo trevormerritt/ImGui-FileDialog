@@ -6,6 +6,8 @@
 */
 
 #pragma once
+using namespace std;
+#include "string_utils.h"
 #include <time.h>
 #include <algorithm>
 #include <cstring>
@@ -14,7 +16,6 @@
 #include <sstream>
 #include <vector>
 #include <imgui.h>
-
 #include <filesystem>
 #include <imgui.h>
 
@@ -35,6 +36,9 @@ struct ImFileDialogInfo
 	std::filesystem::path fileName;
 	std::filesystem::path directoryPath;
 	std::filesystem::path resultPath;
+
+    std::string includeFilter;
+    std::string excludeFilter;
 
 	bool refreshInfo;
 	size_t currentIndex;
